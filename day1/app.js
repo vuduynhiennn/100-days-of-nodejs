@@ -1,12 +1,13 @@
-const http = require('http'); //load the http module
+const http = require('http');
+function index (request, response) {
+ response.writeHead(200);
+ response.end('Hello, World!');
+}
+http.createServer(function (request, response) {
 
-http.createServer((req, res) => {
-    // tell the browser everything is ok
-    res.writeHead(200, {
-        'Content-Type': 'text-plain'
-    });
-
-    res.write('Hello World');
-
-    // res.end();
-}).listen(1340);
+ if (request.url === '/') {
+ return index(request, response);
+ }
+ response.writeHead(404);
+ response.end(http.STATUS_CODES[404]);
+}).listen(1537);
